@@ -1,0 +1,6 @@
+.claude/commands/
+.bmad-core/
+.github/chatmodes/
+node_modules/
+dist/
+.env
