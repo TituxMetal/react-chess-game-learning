@@ -8,7 +8,7 @@ const HomePage = () => {
   }
 
         <div className="mb-20">
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center p-8">
+    <div className="min-h-screen bg-gradient-to-br from-blue-600 via-purple-700 to-indigo-800 w-full">
           <h1 className="text-6xl font-bold text-white mb-8">
       <div className="text-center mb-12">
         <div className="text-6xl mb-6">♟️</div>
