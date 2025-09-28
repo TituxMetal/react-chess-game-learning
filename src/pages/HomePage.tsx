@@ -28,7 +28,7 @@ const HomePage = () => {
           <div className="mb-16">
             <button
               onClick={startLearning}
-              className="px-12 py-6 text-2xl font-bold bg-blue-600 hover:bg-blue-700 text-white rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg"
+              className="px-16 py-8 text-3xl font-black bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white rounded-2xl transition-all duration-300 transform hover:scale-110 shadow-2xl border-4 border-white/20 backdrop-blur-sm"
             >
               🚀 COMMENCER L'AVENTURE ♟️
             </button>
