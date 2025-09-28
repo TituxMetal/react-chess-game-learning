@@ -2,11 +2,9 @@ import { StoryIndex } from '../types/story'
 
 export const loadStoryIndex = async (): Promise<StoryIndex[]> => {
   try {
-    const response = await fetch('/stories/index.json')
-    if (!response.ok) {
-      throw new Error('Failed to load story index')
-    }
-    return await response.json()
+    // Dynamic import of the index file from src/stories
+    const indexModule = await import('../stories/index.json')
+    return indexModule.default
   } catch (error) {
     console.error('Error loading story index:', error)
     return []

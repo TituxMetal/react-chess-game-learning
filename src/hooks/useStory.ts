@@ -14,12 +14,10 @@ export const useStory = (storyId: string, chapterId: string) => {
         setLoading(true)
         setError(null)
         
-        const response = await fetch(`/stories/${storyId}/${chapterId}.md`)
-        if (!response.ok) {
-          throw new Error(`Failed to load chapter: ${response.statusText}`)
-        }
+        // Dynamic import of markdown files from src/stories
+        const markdownModule = await import(`../stories/${storyId}/${chapterId}.md?raw`)
+        const markdownContent = markdownModule.default
         
-        const markdownContent = await response.text()
         const { data, content } = matter(markdownContent)
         
         const htmlContent = await marked(content)
@@ -36,6 +34,7 @@ export const useStory = (storyId: string, chapterId: string) => {
         
         setChapter(chapterData)
       } catch (err) {
+        console.error('Error loading chapter:', err)
         setError(err instanceof Error ? err.message : 'Failed to load chapter')
       } finally {
         setLoading(false)
