@@ -4,75 +4,57 @@ const HomePage = () => {
   const navigate = useNavigate()
 
   const startLearning = () => {
-    console.log('Starting learning journey...')
+    console.log('Button clicked!')
     navigate('/story/01-introduction/chapter/01-what-is-chess')
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800">
+    <div className="min-h-screen bg-slate-900 text-white">
       <div className="container mx-auto px-6 py-16">
         <div className="text-center max-w-4xl mx-auto">
-          {/* Hero Section */}
+          
+          {/* Title */}
+          <h1 className="text-6xl font-bold mb-8 text-blue-400">
+            Apprends les Échecs
+          </h1>
+          
+          {/* Description */}
+          <p className="text-xl text-slate-300 mb-12 max-w-2xl mx-auto">
+            Découvre le monde fascinant des échecs à travers des histoires captivantes.
+            Apprends les règles, les stratégies et deviens un maître du jeu !
+          </p>
+          
+          {/* BIG BUTTON */}
           <div className="mb-16">
-            <h1 className="text-6xl font-bold mb-8 bg-gradient-to-r from-blue-400 via-purple-500 to-blue-600 bg-clip-text text-transparent">
-              Apprends les Échecs
-            </h1>
-            <p className="text-xl text-slate-300 mb-12 leading-relaxed max-w-2xl mx-auto">
-              Découvre le monde fascinant des échecs à travers des histoires captivantes.
-              Apprends les règles, les stratégies et deviens un maître du jeu !
-            </p>
-            
             <button
               onClick={startLearning}
-              className="px-10 py-5 text-xl font-semibold bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-purple-500/25 border border-blue-500/20"
+              className="px-12 py-6 text-2xl font-bold bg-blue-600 hover:bg-blue-700 text-white rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg"
             >
-              Commencer l'aventure ♟️
+              🚀 COMMENCER L'AVENTURE ♟️
             </button>
           </div>
 
           {/* Features */}
-          <div className="grid md:grid-cols-3 gap-8 mb-16">
-            <div className="bg-slate-800/50 backdrop-blur-sm p-8 rounded-2xl border border-slate-700/50 hover:border-slate-600/50 transition-all duration-300 hover:transform hover:scale-105">
-              <div className="text-5xl mb-6">📚</div>
-              <h3 className="text-2xl font-semibold mb-4 text-slate-100">
-                Histoires Captivantes
-              </h3>
-              <p className="text-slate-300 leading-relaxed">
-                Apprends à travers des récits engageants qui rendent l'apprentissage amusant et mémorable.
-              </p>
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="bg-slate-800 p-6 rounded-xl">
+              <div className="text-4xl mb-4">📚</div>
+              <h3 className="text-xl font-semibold mb-2">Histoires</h3>
+              <p className="text-slate-300">Apprends avec des récits captivants</p>
             </div>
             
-            <div className="bg-slate-800/50 backdrop-blur-sm p-8 rounded-2xl border border-slate-700/50 hover:border-slate-600/50 transition-all duration-300 hover:transform hover:scale-105">
-              <div className="text-5xl mb-6">♟️</div>
-              <h3 className="text-2xl font-semibold mb-4 text-slate-100">
-                Échiquier Interactif
-              </h3>
-              <p className="text-slate-300 leading-relaxed">
-                Pratique directement sur un vrai échiquier et visualise chaque mouvement en temps réel.
-              </p>
+            <div className="bg-slate-800 p-6 rounded-xl">
+              <div className="text-4xl mb-4">♟️</div>
+              <h3 className="text-xl font-semibold mb-2">Échiquier</h3>
+              <p className="text-slate-300">Pratique sur un vrai échiquier</p>
             </div>
             
-            <div className="bg-slate-800/50 backdrop-blur-sm p-8 rounded-2xl border border-slate-700/50 hover:border-slate-600/50 transition-all duration-300 hover:transform hover:scale-105">
-              <div className="text-5xl mb-6">🎯</div>
-              <h3 className="text-2xl font-semibold mb-4 text-slate-100">
-                Exercices Pratiques
-              </h3>
-              <p className="text-slate-300 leading-relaxed">
-                Teste tes connaissances avec des questions et des défis adaptés à ton niveau.
-              </p>
+            <div className="bg-slate-800 p-6 rounded-xl">
+              <div className="text-4xl mb-4">🎯</div>
+              <h3 className="text-xl font-semibold mb-2">Exercices</h3>
+              <p className="text-slate-300">Teste tes connaissances</p>
             </div>
           </div>
 
-          {/* Additional Info */}
-          <div className="bg-gradient-to-r from-blue-900/20 to-purple-900/20 backdrop-blur-sm p-8 rounded-2xl border border-blue-500/20">
-            <h2 className="text-2xl font-semibold mb-4 text-slate-100">
-              Pourquoi apprendre les échecs ?
-            </h2>
-            <p className="text-slate-300 leading-relaxed">
-              Les échecs développent la logique, la stratégie et la patience. 
-              C'est un jeu millénaire qui stimule l'esprit et offre des heures de plaisir intellectuel.
-            </p>
-          </div>
         </div>
       </div>
     </div>
