@@ -1,0 +1,80 @@
+[
+  {
+    "id": "01-introduction",
+    "title": "Introduction aux échecs",
+    "chapters": [
+      {
+        "id": "01-what-is-chess",
+        "title": "Qu'est-ce que les échecs ?"
+      },
+      {
+        "id": "02-the-chessboard",
+        "title": "L'échiquier"
+      },
+      {
+        "id": "03-the-pieces-overview",
+        "title": "Présentation des pièces"
+      }
+    ],
+    "nextStory": "02-piece-moves"
+  },
+  {
+    "id": "02-piece-moves",
+    "title": "Comment les pièces bougent",
+    "chapters": [
+      {
+        "id": "01-pawn",
+        "title": "Le pion"
+      },
+      {
+        "id": "02-knight",
+        "title": "Le cavalier"
+      },
+      {
+        "id": "03-bishop",
+        "title": "Le fou"
+      },
+      {
+        "id": "04-rook",
+        "title": "La tour"
+      },
+      {
+        "id": "05-queen",
+        "title": "La dame"
+      },
+      {
+        "id": "06-king",
+        "title": "Le roi"
+      }
+    ],
+    "previousStory": "01-introduction",
+    "nextStory": "03-basic-rules"
+  },
+  {
+    "id": "03-basic-rules",
+    "title": "Règles et stratégies de base",
+    "chapters": [
+      {
+        "id": "01-turn-order",
+        "title": "L'ordre des tours"
+      },
+      {
+        "id": "02-capturing",
+        "title": "La prise des pièces"
+      },
+      {
+        "id": "03-special-moves",
+        "title": "Les coups spéciaux"
+      },
+      {
+        "id": "04-check-checkmate",
+        "title": "Échec et mat"
+      },
+      {
+        "id": "05-opening-principles",
+        "title": "Principes d'ouverture"
+      }
+    ],
+    "previousStory": "02-piece-moves"
+  }
+]
