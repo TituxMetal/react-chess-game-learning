@@ -1,22 +1,11 @@
 import { useNavigate } from 'react-router-dom'
-import { useEffect, useState } from 'react'
 
 const HomePage = () => {
   const navigate = useNavigate()
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
 
   const startLearning = () => {
-    // Navigate to the first story and chapter
+    console.log('Starting learning journey...')
     navigate('/story/01-introduction/chapter/01-what-is-chess')
-  }
-
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-950">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
-      </div>
-    )
   }
 
   return (
@@ -73,12 +62,6 @@ const HomePage = () => {
               </p>
             </div>
           </div>
-
-          {error && (
-            <div className="bg-red-900 border border-red-700 text-red-100 px-4 py-3 rounded-lg mb-8">
-              Error: {error}
-            </div>
-          )}
         </div>
       </div>
     </div>
