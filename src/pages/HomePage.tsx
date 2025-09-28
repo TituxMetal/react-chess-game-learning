@@ -7,45 +7,46 @@ const HomePage = () => {
     navigate('/story/01-introduction/chapter/01-what-is-chess')
   }
 
-  return (
-    <div className="min-h-screen bg-slate-900 flex flex-col items-center justify-center p-8">
-      {/* Header */}
+        <div className="mb-20">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center p-8">
+          <h1 className="text-6xl font-bold text-white mb-8">
       <div className="text-center mb-12">
         <div className="text-6xl mb-6">♟️</div>
-        <h1 className="text-5xl font-bold text-white mb-4">
+          <p className="text-2xl text-slate-300 leading-relaxed max-w-3xl mx-auto">
           Apprends les Échecs
         </h1>
         <p className="text-xl text-slate-300 max-w-2xl">
           Découvre le monde fascinant des échecs à travers des histoires captivantes. 
           Apprends les règles, maîtrise les stratégies et deviens un véritable champion !
         </p>
-      </div>
+        <div className="mb-24">
 
       {/* GIANT BUTTON */}
-      <button
+            className="cursor-pointer bg-blue-600 hover:bg-blue-500 text-white font-bold text-3xl px-16 py-8 rounded-2xl transform hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-blue-500/25"
+            style={{ cursor: 'pointer' }}
         onClick={startLearning}
         className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-2xl px-12 py-6 rounded-xl cursor-pointer transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl"
       >
         🚀 COMMENCER L'AVENTURE 🚀
       </button>
 
-      {/* Features */}
+        <div className="grid md:grid-cols-3 gap-12 max-w-5xl mx-auto">
       <div className="grid md:grid-cols-3 gap-8 mt-16 max-w-4xl">
         <div className="bg-slate-800 p-6 rounded-lg text-center">
-          <div className="text-4xl mb-4">📚</div>
-          <h3 className="text-xl font-bold text-white mb-2">Histoires</h3>
+            <h3 className="text-2xl font-bold text-white mb-6">Histoires</h3>
+            <p className="text-slate-300 text-lg leading-relaxed">Apprends avec des récits captivants</p>
           <p className="text-slate-300">Apprends avec des récits captivants</p>
         </div>
         
         <div className="bg-slate-800 p-6 rounded-lg text-center">
-          <div className="text-4xl mb-4">♟️</div>
-          <h3 className="text-xl font-bold text-white mb-2">Échiquier</h3>
+            <h3 className="text-2xl font-bold text-white mb-6">Échiquier</h3>
+            <p className="text-slate-300 text-lg leading-relaxed">Pratique sur un vrai échiquier</p>
           <p className="text-slate-300">Pratique sur un vrai échiquier</p>
         </div>
         
         <div className="bg-slate-800 p-6 rounded-lg text-center">
-          <div className="text-4xl mb-4">🎯</div>
-          <h3 className="text-xl font-bold text-white mb-2">Exercices</h3>
+            <h3 className="text-2xl font-bold text-white mb-6">Exercices</h3>
+            <p className="text-slate-300 text-lg leading-relaxed">Teste tes connaissances</p>
           <p className="text-slate-300">Teste tes connaissances</p>
         </div>
       </div>
