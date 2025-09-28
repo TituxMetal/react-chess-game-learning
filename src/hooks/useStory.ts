@@ -14,11 +14,16 @@ export const useStory = (storyId: string, chapterId: string) => {
         setLoading(true)
         setError(null)
         
-        // Dynamic import of markdown files from src/stories
+        console.log('Loading chapter:', storyId, chapterId)
+        
+        // Try to load the markdown file
         const markdownModule = await import(`../stories/${storyId}/${chapterId}.md?raw`)
         const markdownContent = markdownModule.default
         
+        console.log('Loaded markdown:', markdownContent.substring(0, 100))
+        
         const { data, content } = matter(markdownContent)
+        console.log('Parsed frontmatter:', data)
         
         const htmlContent = await marked(content)
         
@@ -32,6 +37,7 @@ export const useStory = (storyId: string, chapterId: string) => {
           chessPosition: data.chessPosition,
         }
         
+        console.log('Final chapter data:', chapterData)
         setChapter(chapterData)
       } catch (err) {
         console.error('Error loading chapter:', err)

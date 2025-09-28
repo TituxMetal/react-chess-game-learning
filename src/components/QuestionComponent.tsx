@@ -19,8 +19,8 @@ const QuestionComponent = ({ question, onAnswer }: QuestionComponentProps) => {
 
   if (question.type === 'multiple-choice' && question.options) {
     return (
-      <div className="bg-dark-800 rounded-lg p-6 border border-dark-700">
-        <h3 className="text-xl font-semibold mb-4 text-dark-100">
+      <div className="bg-slate-800 rounded-lg p-6 border border-slate-700">
+        <h3 className="text-xl font-semibold mb-4 text-slate-100">
           {question.prompt}
         </h3>
         
@@ -38,12 +38,12 @@ const QuestionComponent = ({ question, onAnswer }: QuestionComponentProps) => {
               } else if (isWrong) {
                 buttonClass += "bg-red-900 border-red-600 text-red-100"
               } else {
-                buttonClass += "bg-dark-700 border-dark-600 text-dark-300"
+                buttonClass += "bg-slate-700 border-slate-600 text-slate-300"
               }
             } else {
               buttonClass += isSelected 
                 ? "bg-blue-900 border-blue-600 text-blue-100" 
-                : "bg-dark-700 border-dark-600 text-dark-200 hover:bg-dark-600 hover:border-dark-500"
+                : "bg-slate-700 border-slate-600 text-slate-200 hover:bg-slate-600 hover:border-slate-500"
             }
 
             return (
@@ -60,7 +60,7 @@ const QuestionComponent = ({ question, onAnswer }: QuestionComponentProps) => {
         </div>
 
         {showFeedback && (
-          <div className="mt-6 p-4 rounded-lg bg-dark-700 border border-dark-600">
+          <div className="mt-6 p-4 rounded-lg bg-slate-700 border border-slate-600">
             <div className={`flex items-center mb-2 ${
               selectedAnswer === question.correctAnswer ? 'text-green-400' : 'text-red-400'
             }`}>
@@ -68,7 +68,7 @@ const QuestionComponent = ({ question, onAnswer }: QuestionComponentProps) => {
                 {selectedAnswer === question.correctAnswer ? '✓ Correct !' : '✗ Incorrect'}
               </span>
             </div>
-            <p className="text-dark-200">{question.explanation}</p>
+            <p className="text-slate-200">{question.explanation}</p>
           </div>
         )}
       </div>

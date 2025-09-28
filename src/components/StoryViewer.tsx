@@ -2,8 +2,6 @@ import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useStory } from '../hooks/useStory'
 import { useProgress } from '../hooks/useProgress'
-import { loadStoryIndex, getNextChapter, getPreviousChapter } from '../utils/navigation'
-import { StoryIndex } from '../types/story'
 import ChessboardComponent from './ChessboardComponent'
 import QuestionComponent from './QuestionComponent'
 import NavigationButtons from './NavigationButtons'
@@ -14,13 +12,8 @@ const StoryViewer = () => {
   const { chapter, loading, error } = useStory(storyId!, chapterId!)
   const { progress, markComplete, setCurrent } = useProgress()
   
-  const [storyIndex, setStoryIndex] = useState<StoryIndex[]>([])
   const [showQuestion, setShowQuestion] = useState(false)
   const [questionAnswered, setQuestionAnswered] = useState(false)
-
-  useEffect(() => {
-    loadStoryIndex().then(setStoryIndex)
-  }, [])
 
   useEffect(() => {
     if (storyId && chapterId) {
@@ -39,13 +32,6 @@ const StoryViewer = () => {
       return () => clearTimeout(timer)
     }
   }, [chapter])
-
-  const currentStory = storyIndex.find(story => story.id === storyId)
-  const currentChapterIndex = currentStory?.chapters.findIndex(ch => ch.id === chapterId) ?? 0
-  const totalChapters = currentStory?.chapters.length ?? 1
-
-  const nextChapter = getNextChapter(storyIndex, storyId!, chapterId!)
-  const previousChapter = getPreviousChapter(storyIndex, storyId!, chapterId!)
 
   const handleQuestionAnswer = (correct: boolean) => {
     setQuestionAnswered(true)
@@ -76,6 +62,7 @@ const StoryViewer = () => {
       <div className="min-h-screen flex items-center justify-center bg-slate-950">
         <div className="text-center">
           <p className="text-red-400 mb-4">Erreur: {error || 'Chapitre non trouvé'}</p>
+          <p className="text-slate-400 mb-4">Story ID: {storyId}, Chapter ID: {chapterId}</p>
           <button 
             onClick={() => window.history.back()}
             className="px-4 py-2 bg-slate-700 text-slate-100 rounded-lg hover:bg-slate-600"
@@ -92,14 +79,14 @@ const StoryViewer = () => {
       <div className="container mx-auto px-4 py-8 max-w-4xl">
         {/* Progress Bar */}
         <ProgressBar 
-          current={currentChapterIndex + 1} 
-          total={totalChapters}
+          current={1} 
+          total={5}
           className="mb-8"
         />
 
         {/* Chapter Content */}
-        <div className="bg-dark-900 rounded-xl p-8 border border-dark-800 mb-8">
-          <h1 className="text-3xl font-bold mb-6 text-dark-50">
+        <div className="bg-slate-900 rounded-xl p-8 border border-slate-800 mb-8">
+          <h1 className="text-3xl font-bold mb-6 text-slate-50">
             {chapter.title}
           </h1>
           
@@ -132,8 +119,8 @@ const StoryViewer = () => {
 
         {/* Navigation */}
         <NavigationButtons
-          previousChapter={previousChapter}
-          nextChapter={nextChapter}
+          previousChapter={null}
+          nextChapter={{ storyId: '01-introduction', chapterId: '02-the-chessboard' }}
           onNext={handleNext}
           showNext={!chapter.question || questionAnswered}
         />
