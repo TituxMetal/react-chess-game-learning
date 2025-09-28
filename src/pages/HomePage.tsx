@@ -8,39 +8,18 @@ const HomePage = () => {
   }
 
   return (
-    <div style={{
-      minHeight: '100vh',
-      background: 'linear-gradient(135deg, #2563eb 0%, #7c3aed 50%, #3730a3 100%)',
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-      alignItems: 'center',
-      padding: '4rem 2rem',
-      textAlign: 'center'
-    }}>
+    <div className="min-h-screen bg-gradient-to-br from-blue-600 via-purple-700 to-indigo-800 flex flex-col justify-center items-center px-8 py-16">
       
       {/* Chess Icon */}
-      <div style={{ fontSize: '8rem', marginBottom: '2rem' }}>♟️</div>
+      <div className="text-8xl mb-8">♟️</div>
       
       {/* Title */}
-      <h1 style={{
-        fontSize: '4rem',
-        fontWeight: 'bold',
-        color: 'white',
-        marginBottom: '2rem',
-        maxWidth: '1200px'
-      }}>
+      <h1 className="text-6xl font-bold text-white mb-8 text-center max-w-4xl">
         Apprends les Échecs
       </h1>
       
       {/* Description */}
-      <p style={{
-        fontSize: '1.5rem',
-        color: '#e2e8f0',
-        lineHeight: '1.6',
-        maxWidth: '800px',
-        marginBottom: '4rem'
-      }}>
+      <p className="text-2xl text-slate-200 leading-relaxed max-w-4xl text-center mb-16">
         Découvre le monde fascinant des échecs à travers des histoires captivantes. 
         Apprends les règles, maîtrise les stratégies et deviens un véritable champion !
       </p>
@@ -48,105 +27,36 @@ const HomePage = () => {
       {/* Big Button */}
       <button
         onClick={startLearning}
-        style={{
-          backgroundColor: '#f97316',
-          color: 'white',
-          fontSize: '2rem',
-          fontWeight: 'bold',
-          padding: '2rem 4rem',
-          borderRadius: '1rem',
-          border: '4px solid #fed7aa',
-          cursor: 'pointer',
-          marginBottom: '4rem',
-          transform: 'scale(1)',
-          transition: 'all 0.3s ease',
-          boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)'
-        }}
-        onMouseEnter={(e) => {
-          e.target.style.transform = 'scale(1.05)'
-          e.target.style.backgroundColor = '#ea580c'
-        }}
-        onMouseLeave={(e) => {
-          e.target.style.transform = 'scale(1)'
-          e.target.style.backgroundColor = '#f97316'
-        }}
+        className="bg-orange-500 hover:bg-orange-600 text-white text-4xl font-bold px-20 py-12 rounded-2xl border-4 border-orange-300 cursor-pointer mb-24 transform hover:scale-105 transition-all duration-300 shadow-2xl"
       >
         🚀 COMMENCER L'AVENTURE 🚀
       </button>
 
       {/* Feature Cards */}
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-        gap: '3rem',
-        maxWidth: '1200px',
-        width: '100%'
-      }}>
-        <div style={{
-          backgroundColor: 'rgba(30, 41, 59, 0.8)',
-          padding: '3rem',
-          borderRadius: '1rem',
-          border: '1px solid #475569',
-          backdropFilter: 'blur(8px)'
-        }}>
-          <h3 style={{
-            fontSize: '1.5rem',
-            fontWeight: 'bold',
-            color: 'white',
-            marginBottom: '1rem'
-          }}>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-6xl w-full">
+        <div className="bg-slate-800/80 backdrop-blur-sm p-12 rounded-2xl border border-slate-600 text-center">
+          <h3 className="text-2xl font-bold text-white mb-4">
             📚 Histoires
           </h3>
-          <p style={{
-            color: '#cbd5e1',
-            fontSize: '1.1rem'
-          }}>
+          <p className="text-slate-300 text-lg">
             Apprends avec des récits captivants
           </p>
         </div>
         
-        <div style={{
-          backgroundColor: 'rgba(30, 41, 59, 0.8)',
-          padding: '3rem',
-          borderRadius: '1rem',
-          border: '1px solid #475569',
-          backdropFilter: 'blur(8px)'
-        }}>
-          <h3 style={{
-            fontSize: '1.5rem',
-            fontWeight: 'bold',
-            color: 'white',
-            marginBottom: '1rem'
-          }}>
+        <div className="bg-slate-800/80 backdrop-blur-sm p-12 rounded-2xl border border-slate-600 text-center">
+          <h3 className="text-2xl font-bold text-white mb-4">
             ♟️ Échiquier
           </h3>
-          <p style={{
-            color: '#cbd5e1',
-            fontSize: '1.1rem'
-          }}>
+          <p className="text-slate-300 text-lg">
             Pratique sur un vrai échiquier
           </p>
         </div>
         
-        <div style={{
-          backgroundColor: 'rgba(30, 41, 59, 0.8)',
-          padding: '3rem',
-          borderRadius: '1rem',
-          border: '1px solid #475569',
-          backdropFilter: 'blur(8px)'
-        }}>
-          <h3 style={{
-            fontSize: '1.5rem',
-            fontWeight: 'bold',
-            color: 'white',
-            marginBottom: '1rem'
-          }}>
+        <div className="bg-slate-800/80 backdrop-blur-sm p-12 rounded-2xl border border-slate-600 text-center">
+          <h3 className="text-2xl font-bold text-white mb-4">
             🎯 Exercices
           </h3>
-          <p style={{
-            color: '#cbd5e1',
-            fontSize: '1.1rem'
-          }}>
+          <p className="text-slate-300 text-lg">
             Teste tes connaissances
           </p>
         </div>
