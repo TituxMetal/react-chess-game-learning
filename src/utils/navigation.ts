@@ -2,7 +2,7 @@ import { StoryIndex } from '../types/story'
 
 export const loadStoryIndex = async (): Promise<StoryIndex[]> => {
   try {
-    const response = await fetch('/src/stories/index.json')
+    const response = await fetch('/stories/index.json')
     if (!response.ok) {
       throw new Error('Failed to load story index')
     }

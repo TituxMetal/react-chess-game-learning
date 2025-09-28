@@ -62,10 +62,10 @@ const StoryViewer = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-slate-950">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto mb-4"></div>
-          <p className="text-dark-300">Chargement du chapitre...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-400 mx-auto mb-4"></div>
+          <p className="text-slate-300">Chargement du chapitre...</p>
         </div>
       </div>
     )
@@ -73,12 +73,12 @@ const StoryViewer = () => {
 
   if (error || !chapter) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-slate-950">
         <div className="text-center">
           <p className="text-red-400 mb-4">Erreur: {error || 'Chapitre non trouvé'}</p>
           <button 
             onClick={() => window.history.back()}
-            className="px-4 py-2 bg-dark-700 text-dark-100 rounded-lg hover:bg-dark-600"
+            className="px-4 py-2 bg-slate-700 text-slate-100 rounded-lg hover:bg-slate-600"
           >
             Retour
           </button>
@@ -88,7 +88,7 @@ const StoryViewer = () => {
   }
 
   return (
-    <div className="min-h-screen bg-dark-950">
+    <div className="min-h-screen bg-slate-950">
       <div className="container mx-auto px-4 py-8 max-w-4xl">
         {/* Progress Bar */}
         <ProgressBar 

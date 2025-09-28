@@ -14,7 +14,7 @@ export const useStory = (storyId: string, chapterId: string) => {
         setLoading(true)
         setError(null)
         
-        const response = await fetch(`/src/stories/${storyId}/${chapterId}.md`)
+        const response = await fetch(`/stories/${storyId}/${chapterId}.md`)
         if (!response.ok) {
           throw new Error(`Failed to load chapter: ${response.statusText}`)
         }
