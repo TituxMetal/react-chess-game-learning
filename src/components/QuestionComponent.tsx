@@ -77,3 +77,5 @@ const QuestionComponent = ({ question, onAnswer }: QuestionComponentProps) => {
 
   return null
 }
+
+export default QuestionComponent
