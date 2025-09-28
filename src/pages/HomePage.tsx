@@ -8,40 +8,57 @@ const HomePage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-600 via-purple-700 to-indigo-800 w-full p-16">
-      <div className="text-center mb-32">
-        <div className="text-6xl mb-6">♟️</div>
-        <h1 className="text-6xl font-bold text-white mb-8">
+    <div className="min-h-screen bg-gradient-to-br from-blue-600 via-purple-700 to-indigo-800 flex flex-col justify-center items-center px-8 py-16">
+      {/* Main Content Container */}
+      <div className="text-center max-w-6xl mx-auto space-y-16">
+        
+        {/* Chess Icon */}
+        <div className="text-8xl mb-8">♟️</div>
+        
+        {/* Title */}
+        <h1 className="text-6xl md:text-7xl font-bold text-white mb-8">
           Apprends les Échecs
         </h1>
-        <p className="text-2xl text-slate-300 leading-relaxed max-w-3xl mx-auto mb-16">
+        
+        {/* Description */}
+        <p className="text-xl md:text-2xl text-slate-200 leading-relaxed max-w-4xl mx-auto mb-16">
           Découvre le monde fascinant des échecs à travers des histoires captivantes. 
           Apprends les règles, maîtrise les stratégies et deviens un véritable champion !
         </p>
 
-        <button
-          onClick={startLearning}
-          className="cursor-pointer bg-orange-500 hover:bg-orange-400 text-white font-bold text-4xl px-20 py-12 rounded-2xl transform hover:scale-105 transition-all duration-300 shadow-2xl border-4 border-orange-300"
-          style={{ cursor: 'pointer' }}
-        >
-          🚀 COMMENCER L'AVENTURE 🚀
-        </button>
-      </div>
+        {/* Big Button */}
+        <div className="mb-24">
+          <button
+            onClick={startLearning}
+            className="cursor-pointer bg-orange-500 hover:bg-orange-400 text-white font-bold text-3xl md:text-4xl px-16 py-8 rounded-2xl transform hover:scale-105 transition-all duration-300 shadow-2xl border-4 border-orange-300"
+            style={{ cursor: 'pointer' }}
+          >
+            🚀 COMMENCER L'AVENTURE 🚀
+          </button>
+        </div>
 
-      <div className="grid md:grid-cols-3 gap-16 max-w-5xl mx-auto">
-        <div className="bg-slate-800/80 p-12 rounded-lg text-center backdrop-blur-sm">
-          <h3 className="text-2xl font-bold text-white mb-6">Histoires</h3>
-          <p className="text-slate-300 text-lg leading-relaxed">Apprends avec des récits captivants</p>
-        </div>
-        
-        <div className="bg-slate-800/80 p-12 rounded-lg text-center backdrop-blur-sm">
-          <h3 className="text-2xl font-bold text-white mb-6">Échiquier</h3>
-          <p className="text-slate-300 text-lg leading-relaxed">Pratique sur un vrai échiquier</p>
-        </div>
-        
-        <div className="bg-slate-800/80 p-12 rounded-lg text-center backdrop-blur-sm">
-          <h3 className="text-2xl font-bold text-white mb-6">Exercices</h3>
-          <p className="text-slate-300 text-lg leading-relaxed">Teste tes connaissances</p>
+        {/* Feature Cards */}
+        <div className="grid md:grid-cols-3 gap-12 max-w-5xl mx-auto">
+          <div className="bg-slate-800/80 p-10 rounded-xl text-center backdrop-blur-sm border border-slate-600">
+            <h3 className="text-2xl font-bold text-white mb-6">📚 Histoires</h3>
+            <p className="text-slate-300 text-lg leading-relaxed">
+              Apprends avec des récits captivants
+            </p>
+          </div>
+          
+          <div className="bg-slate-800/80 p-10 rounded-xl text-center backdrop-blur-sm border border-slate-600">
+            <h3 className="text-2xl font-bold text-white mb-6">♟️ Échiquier</h3>
+            <p className="text-slate-300 text-lg leading-relaxed">
+              Pratique sur un vrai échiquier
+            </p>
+          </div>
+          
+          <div className="bg-slate-800/80 p-10 rounded-xl text-center backdrop-blur-sm border border-slate-600">
+            <h3 className="text-2xl font-bold text-white mb-6">🎯 Exercices</h3>
+            <p className="text-slate-300 text-lg leading-relaxed">
+              Teste tes connaissances
+            </p>
+          </div>
         </div>
       </div>
     </div>
