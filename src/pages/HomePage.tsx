@@ -30,14 +30,15 @@ const HomePage = () => {
           <div className="mb-20">
             <button
               onClick={startLearning}
-              className="inline-block px-12 py-6 text-2xl md:text-3xl font-black bg-gradient-to-r from-blue-500 via-purple-600 to-blue-500 hover:from-blue-600 hover:via-purple-700 hover:to-blue-600 text-white rounded-2xl transition-all duration-300 transform hover:scale-110 shadow-2xl border-4 border-white/30 backdrop-blur-sm animate-pulse hover:animate-none"
+              className="cursor-pointer inline-block px-12 py-6 text-2xl md:text-3xl font-black bg-gradient-to-r from-blue-500 via-purple-600 to-blue-500 hover:from-blue-600 hover:via-purple-700 hover:to-blue-600 text-white rounded-2xl transition-all duration-300 transform hover:scale-110 shadow-2xl border-4 border-white/30 backdrop-blur-sm animate-pulse hover:animate-none active:scale-95"
               style={{
                 minWidth: '400px',
                 minHeight: '80px',
                 fontSize: '28px',
                 fontWeight: '900',
                 textShadow: '2px 2px 4px rgba(0,0,0,0.5)',
-                boxShadow: '0 20px 40px rgba(59, 130, 246, 0.3), 0 0 0 1px rgba(255,255,255,0.1)'
+                boxShadow: '0 20px 40px rgba(59, 130, 246, 0.3), 0 0 0 1px rgba(255,255,255,0.1)',
+                cursor: 'pointer'
               }}
             >
               🚀 COMMENCER L'AVENTURE ♟️
