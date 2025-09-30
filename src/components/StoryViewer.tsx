@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useStory } from '../hooks/useStory'
 import { useProgress } from '../hooks/useProgress'
+import { loadStoryIndex, getNextChapter, getPreviousChapter } from '../utils/navigation'
+import { StoryIndex } from '../types/story'
 import ChessboardComponent from './ChessboardComponent'
 import QuestionComponent from './QuestionComponent'
 import NavigationButtons from './NavigationButtons'
@@ -14,7 +16,21 @@ const StoryViewer = () => {
   
   const [showQuestion, setShowQuestion] = useState(false)
   const [questionAnswered, setQuestionAnswered] = useState(false)
+  const [storyIndex, setStoryIndex] = useState<StoryIndex[]>([])
+  const [nextChapter, setNextChapter] = useState<{ storyId: string; chapterId: string } | null>(null)
+  const [previousChapter, setPreviousChapter] = useState<{ storyId: string; chapterId: string } | null>(null)
 
+  useEffect(() => {
+    loadStoryIndex().then(index => {
+      setStoryIndex(index)
+      if (storyId && chapterId) {
+        const next = getNextChapter(index, storyId, chapterId)
+        const prev = getPreviousChapter(index, storyId, chapterId)
+        setNextChapter(next)
+        setPreviousChapter(prev)
+      }
+    })
+  }, [storyId, chapterId])
   useEffect(() => {
     if (storyId && chapterId) {
       setCurrent(storyId, chapterId)
@@ -46,6 +62,11 @@ const StoryViewer = () => {
     }
   }
 
+  // Calculate progress based on current story
+  const currentStory = storyIndex.find(story => story.id === storyId)
+  const currentChapterIndex = currentStory?.chapters.findIndex(ch => ch.id === chapterId) ?? 0
+  const totalChapters = currentStory?.chapters.length ?? 1
+  const currentChapterNumber = currentChapterIndex + 1
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-slate-950">
@@ -79,8 +100,8 @@ const StoryViewer = () => {
       <div className="container mx-auto px-4 py-8 max-w-4xl">
         {/* Progress Bar */}
         <ProgressBar 
-          current={1} 
-          total={5}
+          current={currentChapterNumber} 
+          total={totalChapters}
           className="mb-8"
         />
 
@@ -119,8 +140,8 @@ const StoryViewer = () => {
 
         {/* Navigation */}
         <NavigationButtons
-          previousChapter={null}
-          nextChapter={{ storyId: '01-introduction', chapterId: '02-the-chessboard' }}
+          previousChapter={previousChapter}
+          nextChapter={nextChapter}
           onNext={handleNext}
           showNext={!chapter.question || questionAnswered}
         />
