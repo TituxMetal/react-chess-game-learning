@@ -1,6 +1,4 @@
 import { useState, useEffect } from 'react'
-import matter from 'gray-matter'
-import { marked } from 'marked'
 import { ChapterData } from '../types/story'
 
 export const useStory = (storyId: string, chapterId: string) => {
@@ -14,30 +12,28 @@ export const useStory = (storyId: string, chapterId: string) => {
         setLoading(true)
         setError(null)
         
-        console.log('Loading chapter:', storyId, chapterId)
+        // Load from the stories index to get the chapter data
+        const indexModule = await import('../stories/index.json')
+        const storyIndex = indexModule.default
         
-        // Try to load the markdown file
-        const markdownModule = await import(`../stories/${storyId}/${chapterId}.md?raw`)
-        const markdownContent = markdownModule.default
+        const story = storyIndex.find((s: any) => s.id === storyId)
+        const chapter = story?.chapters.find((c: any) => c.id === chapterId)
         
-        console.log('Loaded markdown:', markdownContent.substring(0, 100))
-        
-        const { data, content } = matter(markdownContent)
-        console.log('Parsed frontmatter:', data)
-        
-        const htmlContent = await marked(content)
-        
-        const chapterData: ChapterData = {
-          id: data.id || chapterId,
-          title: data.title || 'Untitled Chapter',
-          chapterNumber: data.chapterNumber || 1,
-          storyId: data.storyId || storyId,
-          content: htmlContent,
-          question: data.question,
-          chessPosition: data.chessPosition,
+        if (!story || !chapter) {
+          throw new Error(`Chapter not found: ${storyId}/${chapterId}`)
         }
         
-        console.log('Final chapter data:', chapterData)
+        // For now, create mock content - we'll need to restructure the data
+        const chapterData: ChapterData = {
+          id: chapterId,
+          title: chapter.title,
+          chapterNumber: 1,
+          storyId: storyId,
+          content: `<h2>${chapter.title}</h2><p>Contenu du chapitre en cours de chargement...</p>`,
+          question: undefined,
+          chessPosition: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1',
+        }
+        
         setChapter(chapterData)
       } catch (err) {
         console.error('Error loading chapter:', err)
