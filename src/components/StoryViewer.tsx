@@ -91,7 +91,7 @@ const StoryViewer = () => {
           </h1>
           
           <div 
-            className="prose prose-invert prose-lg max-w-none mb-8 text-slate-200"
+            className="prose prose-invert prose-lg max-w-none mb-8 text-slate-200 [&_*]:text-slate-200 [&_h1]:text-slate-100 [&_h2]:text-slate-100 [&_h3]:text-slate-100 [&_p]:text-slate-200 [&_strong]:text-slate-100"
             dangerouslySetInnerHTML={{ __html: chapter.content }}
           />
 
