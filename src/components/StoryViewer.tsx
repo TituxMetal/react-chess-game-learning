@@ -143,7 +143,7 @@ const StoryViewer = () => {
           previousChapter={previousChapter}
           nextChapter={nextChapter}
           onNext={handleNext}
-          showNext={!chapter.question || questionAnswered}
+          showNext={true}
         />
       </div>
     </div>
