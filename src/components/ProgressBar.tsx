@@ -10,10 +10,10 @@ const ProgressBar = ({ current, total, className = '' }: ProgressBarProps) => {
   return (
     <div className={`w-full ${className}`}>
       <div className="flex justify-between items-center mb-2">
-        <span className="text-sm font-medium text-dark-300">
+        <span className="text-sm font-medium text-slate-300">
           Chapitre {current} sur {total}
         </span>
-        <span className="text-sm font-medium text-dark-300">
+        <span className="text-sm font-medium text-slate-300">
           {percentage}%
         </span>
       </div>

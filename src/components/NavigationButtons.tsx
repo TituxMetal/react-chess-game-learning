@@ -36,8 +36,8 @@ const NavigationButtons = ({
         disabled={!previousChapter}
         className={`px-6 py-3 rounded-lg font-medium transition-all duration-200 ${
           previousChapter
-            ? 'bg-dark-700 hover:bg-dark-600 text-dark-100 border border-dark-600'
-            : 'bg-dark-800 text-dark-500 cursor-not-allowed border border-dark-700'
+            ? 'bg-slate-700 hover:bg-slate-600 text-slate-100 border border-slate-600'
+            : 'bg-slate-800 text-slate-400 cursor-not-allowed border border-slate-700'
         }`}
       >
         ← Précédent
@@ -50,7 +50,7 @@ const NavigationButtons = ({
           className={`px-6 py-3 rounded-lg font-medium transition-all duration-200 ${
             nextChapter || onNext
               ? 'bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white'
-              : 'bg-dark-800 text-dark-500 cursor-not-allowed border border-dark-700'
+              : 'bg-slate-800 text-slate-400 cursor-not-allowed border border-slate-700'
           }`}
         >
           Suivant →
