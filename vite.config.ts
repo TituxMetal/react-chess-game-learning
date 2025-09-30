@@ -6,6 +6,14 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   assetsInclude: ['**/*.md'],
+  define: {
+    global: 'window',
+  },
+  resolve: {
+    alias: {
+      buffer: 'buffer',
+    },
+  },
   server: {
     fs: {
       allow: ['..']
