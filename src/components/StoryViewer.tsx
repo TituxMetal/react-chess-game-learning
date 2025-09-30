@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { useStory } from '../hooks/useStory'
 import { useProgress } from '../hooks/useProgress'
 import { loadStoryIndex, getNextChapter, getPreviousChapter } from '../utils/navigation'
@@ -11,6 +11,7 @@ import ProgressBar from './ProgressBar'
 
 const StoryViewer = () => {
   const { storyId, chapterId } = useParams<{ storyId: string; chapterId: string }>()
+  const navigate = useNavigate()
   const { chapter, loading, error } = useStory(storyId!, chapterId!)
   const { progress, markComplete, setCurrent } = useProgress()
   
@@ -59,6 +60,11 @@ const StoryViewer = () => {
   const handleNext = () => {
     if (!chapter?.question || questionAnswered) {
       markComplete(storyId!, chapterId!)
+    }
+    
+    // Navigate to next chapter
+    if (nextChapter) {
+      navigate(`/story/${nextChapter.storyId}/chapter/${nextChapter.chapterId}`)
     }
   }
 
