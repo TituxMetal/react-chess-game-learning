@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
-import { ChapterData } from '../types/story'
+import { ChapterData, Question } from '../types/story'
+import { parseMarkdown } from '../utils/markdownParser'
 
 export const useStory = (storyId: string, chapterId: string) => {
   const [chapter, setChapter] = useState<ChapterData | null>(null)
@@ -12,26 +13,23 @@ export const useStory = (storyId: string, chapterId: string) => {
         setLoading(true)
         setError(null)
         
-        // Load from the stories index to get the chapter data
-        const indexModule = await import('../stories/index.json')
-        const storyIndex = indexModule.default
-        
-        const story = storyIndex.find((s: any) => s.id === storyId)
-        const chapter = story?.chapters.find((c: any) => c.id === chapterId)
-        
-        if (!story || !chapter) {
-          throw new Error(`Chapter not found: ${storyId}/${chapterId}`)
+        // Try to load the markdown file directly
+        const response = await fetch(`/src/stories/${storyId}/${chapterId}.md`)
+        if (!response.ok) {
+          throw new Error(`Failed to load story: ${response.status}`)
         }
         
-        // For now, create mock content - we'll need to restructure the data
+        const markdownContent = await response.text()
+        const { frontmatter, html } = parseMarkdown(markdownContent)
+        
         const chapterData: ChapterData = {
-          id: chapterId,
-          title: chapter.title,
-          chapterNumber: 1,
-          storyId: storyId,
-          content: `<h2>${chapter.title}</h2><p>Contenu du chapitre en cours de chargement...</p>`,
-          question: undefined,
-          chessPosition: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1',
+          id: frontmatter.id || chapterId,
+          title: frontmatter.title || 'Chapter',
+          chapterNumber: frontmatter.chapterNumber || 1,
+          storyId: frontmatter.storyId || storyId,
+          content: html,
+          question: frontmatter.question as Question | undefined,
+          chessPosition: frontmatter.chessPosition,
         }
         
         setChapter(chapterData)
