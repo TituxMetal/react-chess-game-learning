@@ -4,27 +4,23 @@ interface ProgressBarProps {
   className?: string
 }
 
-const ProgressBar = ({ current, total, className = '' }: ProgressBarProps) => {
+export const ProgressBar = ({ current, total, className = '' }: ProgressBarProps) => {
   const percentage = Math.round((current / total) * 100)
 
   return (
     <div className={`w-full ${className}`}>
-      <div className="flex justify-between items-center mb-2">
-        <span className="text-sm font-medium text-slate-300">
+      <div className='flex justify-between items-center mb-3'>
+        <span className='text-sm font-medium text-zinc-300'>
           Chapitre {current} sur {total}
         </span>
-        <span className="text-sm font-medium text-slate-300">
-          {percentage}%
-        </span>
+        <span className='text-sm font-medium text-zinc-300'>{percentage}%</span>
       </div>
-      <div className="w-full bg-dark-700 rounded-full h-2">
+      <div className='w-full bg-zinc-800 rounded-full h-2'>
         <div
-          className="bg-gradient-to-r from-blue-600 to-purple-600 h-2 rounded-full transition-all duration-300"
+          className='bg-amber-600 h-2 rounded-full transition-all duration-300'
           style={{ width: `${percentage}%` }}
         />
       </div>
     </div>
   )
 }
-
-export default ProgressBar

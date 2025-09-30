@@ -7,10 +7,10 @@ interface ChessboardComponentProps {
   size?: number
 }
 
-const ChessboardComponent = ({ 
-  position, 
-  interactive = false, 
-  size = 400 
+export const ChessboardComponent = ({
+  position,
+  interactive = false,
+  size = 400
 }: ChessboardComponentProps) => {
   const { chess, setPosition, setInteractive, onSquareClick, onPieceDrop } = useChessboard()
 
@@ -25,9 +25,9 @@ const ChessboardComponent = ({
   }
 
   return (
-    <div className="flex justify-center p-4">
-      <div 
-        className="rounded-lg overflow-hidden shadow-2xl border-2 border-dark-700"
+    <div className='flex justify-center p-4'>
+      <div
+        className='rounded-lg overflow-hidden shadow-2xl border-2 border-dark-700'
         style={{ width: size, height: size }}
       >
         <Chessboard
@@ -37,18 +37,16 @@ const ChessboardComponent = ({
           arePiecesDraggable={interactive}
           boardWidth={size}
           customBoardStyle={{
-            borderRadius: '8px',
+            borderRadius: '8px'
           }}
           customDarkSquareStyle={{
-            backgroundColor: '#475569',
+            backgroundColor: '#475569'
           }}
           customLightSquareStyle={{
-            backgroundColor: '#cbd5e1',
+            backgroundColor: '#cbd5e1'
           }}
         />
       </div>
     </div>
   )
 }
-
-export default ChessboardComponent

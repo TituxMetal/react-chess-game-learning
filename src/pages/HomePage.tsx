@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom'
+import { Button } from '../components/Button'
 
-const HomePage = () => {
+export const HomePage = () => {
   const navigate = useNavigate()
 
   const startLearning = () => {
@@ -8,61 +9,45 @@ const HomePage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-600 via-purple-700 to-indigo-800 flex flex-col justify-center items-center px-8 py-16">
-      
+    <div className='min-h-screen bg-zinc-900 flex flex-col justify-center items-center px-6 py-8'>
       {/* Chess Icon */}
-      <div className="text-8xl mb-8">♟️</div>
-      
+      <div className='text-6xl mb-8'>♟️</div>
+
       {/* Title */}
-      <h1 className="text-6xl font-bold text-white mb-8 text-center max-w-4xl">
+      <h1 className='text-4xl font-semibold text-zinc-100 mb-4 text-center'>
         Apprends les Échecs
       </h1>
-      
+
       {/* Description */}
-      <p className="text-2xl text-slate-200 leading-relaxed max-w-4xl text-center mb-16">
-        Découvre le monde fascinant des échecs à travers des histoires captivantes. 
-        Apprends les règles, maîtrise les stratégies et deviens un véritable champion !
+      <p className='text-lg text-zinc-300 leading-relaxed max-w-xl text-center mb-12'>
+        Découvre le monde des échecs à travers des histoires captivantes.
       </p>
 
       {/* Big Button */}
-      <button
-        onClick={startLearning}
-        className="bg-orange-500 hover:bg-orange-600 text-white text-4xl font-bold px-20 py-12 rounded-2xl border-4 border-orange-300 cursor-pointer mb-24 transform hover:scale-105 transition-all duration-300 shadow-2xl"
-      >
-        🚀 COMMENCER L'AVENTURE 🚀
-      </button>
+      <Button onClick={startLearning} variant='primary' className='px-10 py-3.5 mb-20'>
+        Commencer
+      </Button>
 
       {/* Feature Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-6xl w-full">
-        <div className="bg-slate-800/80 backdrop-blur-sm p-12 rounded-2xl border border-slate-600 text-center">
-          <h3 className="text-2xl font-bold text-white mb-4">
-            📚 Histoires
-          </h3>
-          <p className="text-slate-300 text-lg">
-            Apprends avec des récits captivants
-          </p>
+      <div className='grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl w-full'>
+        <div className='bg-zinc-800 p-8 rounded-lg border border-zinc-700 text-center'>
+          <div className='text-3xl mb-3'>📚</div>
+          <h3 className='text-base font-medium text-zinc-100 mb-2'>Histoires</h3>
+          <p className='text-zinc-400 text-sm'>Apprends avec des récits</p>
         </div>
-        
-        <div className="bg-slate-800/80 backdrop-blur-sm p-12 rounded-2xl border border-slate-600 text-center">
-          <h3 className="text-2xl font-bold text-white mb-4">
-            ♟️ Échiquier
-          </h3>
-          <p className="text-slate-300 text-lg">
-            Pratique sur un vrai échiquier
-          </p>
+
+        <div className='bg-zinc-800 p-8 rounded-lg border border-zinc-700 text-center'>
+          <div className='text-3xl mb-3'>♟️</div>
+          <h3 className='text-base font-medium text-zinc-100 mb-2'>Échiquier</h3>
+          <p className='text-zinc-400 text-sm'>Pratique les coups</p>
         </div>
-        
-        <div className="bg-slate-800/80 backdrop-blur-sm p-12 rounded-2xl border border-slate-600 text-center">
-          <h3 className="text-2xl font-bold text-white mb-4">
-            🎯 Exercices
-          </h3>
-          <p className="text-slate-300 text-lg">
-            Teste tes connaissances
-          </p>
+
+        <div className='bg-zinc-800 p-8 rounded-lg border border-zinc-700 text-center'>
+          <div className='text-3xl mb-3'>🎯</div>
+          <h3 className='text-base font-medium text-zinc-100 mb-2'>Exercices</h3>
+          <p className='text-zinc-400 text-sm'>Teste tes connaissances</p>
         </div>
       </div>
     </div>
   )
 }
-
-export default HomePage

@@ -1,4 +1,4 @@
-import { atom, map } from 'nanostores'
+import { map } from 'nanostores'
 
 export interface Progress {
   completedChapters: Set<string>
@@ -9,14 +9,14 @@ export interface Progress {
 export const progressStore = map<Progress>({
   completedChapters: new Set(),
   currentStory: null,
-  currentChapter: null,
+  currentChapter: null
 })
 
 export const markChapterComplete = (storyId: string, chapterId: string) => {
   const current = progressStore.get()
   const newCompleted = new Set(current.completedChapters)
   newCompleted.add(`${storyId}-${chapterId}`)
-  
+
   progressStore.setKey('completedChapters', newCompleted)
 }
 
@@ -27,5 +27,6 @@ export const setCurrentChapter = (storyId: string, chapterId: string) => {
 
 export const isChapterComplete = (storyId: string, chapterId: string): boolean => {
   const progress = progressStore.get()
+
   return progress.completedChapters.has(`${storyId}-${chapterId}`)
 }

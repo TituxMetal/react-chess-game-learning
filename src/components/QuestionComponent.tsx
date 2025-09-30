@@ -1,56 +1,67 @@
 import { useState } from 'react'
 import { Question } from '../types/story'
+import { Button } from './Button'
 
 interface QuestionComponentProps {
   question: Question
   onAnswer: (correct: boolean) => void
 }
 
-const QuestionComponent = ({ question, onAnswer }: QuestionComponentProps) => {
+export const QuestionComponent = ({ question, onAnswer }: QuestionComponentProps) => {
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null)
   const [showFeedback, setShowFeedback] = useState(false)
+  const [isAnswered, setIsAnswered] = useState(false)
 
   const handleAnswerSelect = (answer: string) => {
     setSelectedAnswer(answer)
     setShowFeedback(true)
+
     const isCorrect = answer === question.correctAnswer
-    setTimeout(() => onAnswer(isCorrect), 1500)
+
+    if (isCorrect) {
+      setIsAnswered(true)
+      setTimeout(() => onAnswer(isCorrect), 200)
+    }
+  }
+
+  const handleRetry = () => {
+    setSelectedAnswer(null)
+    setShowFeedback(false)
   }
 
   if (question.type === 'multiple-choice' && question.options) {
     return (
-      <div className="bg-slate-800 rounded-lg p-6 border border-slate-700">
-        <h3 className="text-xl font-semibold mb-4 text-slate-100">
-          {question.prompt}
-        </h3>
-        
-        <div className="space-y-3">
+      <div className='bg-zinc-800 rounded-lg p-8 border border-zinc-700'>
+        <h3 className='text-xl font-medium mb-6 text-zinc-100'>{question.prompt}</h3>
+
+        <div className='space-y-3'>
           {question.options.map((option, index) => {
             const isSelected = selectedAnswer === option
             const isCorrect = option === question.correctAnswer
             const isWrong = isSelected && !isCorrect
-            
-            let buttonClass = "w-full p-4 text-left rounded-lg border-2 transition-all duration-200 "
-            
+
+            let buttonClass =
+              'w-full p-4 text-left rounded-lg border transition-colors duration-150 cursor-pointer text-base '
+
             if (showFeedback) {
               if (isCorrect) {
-                buttonClass += "bg-green-900 border-green-600 text-green-100"
+                buttonClass += 'bg-emerald-900 border-emerald-700 text-zinc-100'
               } else if (isWrong) {
-                buttonClass += "bg-red-900 border-red-600 text-red-100"
+                buttonClass += 'bg-zinc-800 border-zinc-700 text-zinc-400'
               } else {
-                buttonClass += "bg-slate-700 border-slate-600 text-slate-300"
+                buttonClass += 'bg-zinc-800 border-zinc-700 text-zinc-300'
               }
             } else {
-              buttonClass += isSelected 
-                ? "bg-blue-900 border-blue-600 text-blue-100" 
-                : "bg-slate-700 border-slate-600 text-slate-200 hover:bg-slate-600 hover:border-slate-500"
+              buttonClass += isSelected
+                ? 'bg-amber-900 border-amber-700 text-zinc-100'
+                : 'bg-zinc-800 border-zinc-700 text-zinc-200 hover:bg-zinc-700 hover:border-zinc-600'
             }
 
             return (
               <button
                 key={index}
-                onClick={() => !showFeedback && handleAnswerSelect(option)}
-                disabled={showFeedback}
+                onClick={() => !isAnswered && handleAnswerSelect(option)}
+                disabled={isAnswered}
                 className={buttonClass}
               >
                 {option}
@@ -60,15 +71,22 @@ const QuestionComponent = ({ question, onAnswer }: QuestionComponentProps) => {
         </div>
 
         {showFeedback && (
-          <div className="mt-6 p-4 rounded-lg bg-slate-700 border border-slate-600">
-            <div className={`flex items-center mb-2 ${
-              selectedAnswer === question.correctAnswer ? 'text-green-400' : 'text-red-400'
-            }`}>
-              <span className="text-lg font-semibold">
-                {selectedAnswer === question.correctAnswer ? '✓ Correct !' : '✗ Incorrect'}
+          <div className='mt-6 p-5 rounded-lg bg-zinc-800 border border-zinc-700'>
+            <div className='flex items-center justify-between mb-3'>
+              <span className={`text-base font-medium ${
+                selectedAnswer === question.correctAnswer ? 'text-emerald-300' : 'text-zinc-300'
+              }`}>
+                {selectedAnswer === question.correctAnswer ? '✓ Correct' : '✗ Incorrect'}
               </span>
+              {!isAnswered && (
+                <Button onClick={handleRetry} variant='secondary' className='px-5 py-2 text-sm'>
+                  Réessayer
+                </Button>
+              )}
             </div>
-            <p className="text-slate-200">{question.explanation}</p>
+            {selectedAnswer === question.correctAnswer && (
+              <p className='text-zinc-300 text-base mt-2 leading-relaxed'>{question.explanation}</p>
+            )}
           </div>
         )}
       </div>
@@ -77,5 +95,3 @@ const QuestionComponent = ({ question, onAnswer }: QuestionComponentProps) => {
 
   return null
 }
-
-export default QuestionComponent

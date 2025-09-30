@@ -20,14 +20,14 @@ export const useStory = (storyId: string, chapterId: string) => {
         }
         
         const markdownContent = await response.text()
-        const { frontmatter, html } = parseMarkdown(markdownContent)
-        
+        const { frontmatter, markdown } = parseMarkdown(markdownContent)
+
         const chapterData: ChapterData = {
           id: frontmatter.id || chapterId,
           title: frontmatter.title || 'Chapter',
           chapterNumber: frontmatter.chapterNumber || 1,
           storyId: frontmatter.storyId || storyId,
-          content: html,
+          content: markdown,
           question: frontmatter.question as Question | undefined,
           chessPosition: frontmatter.chessPosition,
         }
