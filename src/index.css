@@ -2,3 +2,30 @@
 
 @tailwind base;
 @tailwind components;
+@tailwind utilities;
+
+/* Override prose styles for dark theme */
+.prose-invert {
+  color: #e2e8f0 !important;
+}
+
+.prose-invert h1,
+.prose-invert h2,
+.prose-invert h3,
+.prose-invert h4,
+.prose-invert h5,
+.prose-invert h6 {
+  color: #f1f5f9 !important;
+}
+
+.prose-invert p {
+  color: #cbd5e1 !important;
+}
+
+.prose-invert strong {
+  color: #f8fafc !important;
+}
+
+.prose-invert em {
+  color: #e2e8f0 !important;
+}
