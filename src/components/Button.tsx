@@ -14,7 +14,8 @@ export const Button = ({
   onClick,
   disabled = false,
   variant = 'neutral',
-  className = ''
+  className = '',
+  'aria-label': ariaLabel
 }: ButtonProps) => {
   const baseClasses =
     'px-6 py-3 rounded-lg font-medium transition-colors duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 focus:ring-offset-zinc-900'
