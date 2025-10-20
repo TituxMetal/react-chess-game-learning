@@ -94,28 +94,38 @@ export const useChessGame = ({
       const gameCopy = new Chess(game.fen())
 
       try {
-        let chessMove
-        let moveStr: string
-
+        // Handle keyboard input - algebraic notation
         if (typeof moveInput === 'string') {
-          // Keyboard input - algebraic notation
-          chessMove = gameCopy.move(moveInput.trim().toLowerCase())
+          const chessMove = gameCopy.move(moveInput.trim().toLowerCase())
           if (chessMove === null) {
             return { error: 'Invalid move notation' }
           }
-          moveStr = `${chessMove.from}${chessMove.to}`
-        } else {
-          // Drag and drop input
-          chessMove = gameCopy.move({
-            from: moveInput.from,
-            to: moveInput.to,
-            promotion: 'q' // Always promote to queen for simplicity
-          })
-          if (chessMove === null) {
-            return { error: 'Illegal move' }
-          }
-          moveStr = `${moveInput.from}${moveInput.to}`
+          const moveStr = `${chessMove.from}${chessMove.to}`
+
+          // Update game state
+          setGame(gameCopy)
+          setUserMove(moveStr)
+
+          // Validate the move
+          const isCorrect = validateMove(moveStr)
+
+          // Always update the state and call onMove
+          setQuestionAnswer(moveStr, isCorrect)
+          onMove(moveStr, isCorrect)
+
+          return { success: true, move: moveStr, correct: isCorrect }
         }
+
+        // Handle drag and drop input
+        const chessMove = gameCopy.move({
+          from: moveInput.from,
+          to: moveInput.to,
+          promotion: 'q' // Always promote to queen for simplicity
+        })
+        if (chessMove === null) {
+          return { error: 'Illegal move' }
+        }
+        const moveStr = `${moveInput.from}${moveInput.to}`
 
         // Update game state
         setGame(gameCopy)
