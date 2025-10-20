@@ -8,7 +8,7 @@ const STARTING_FEN = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'
 /**
  * Helper function to determine if a question should use the starting position
  */
-const isStartingPosition = (initialPosition: string | undefined): boolean => {
+const shouldUseStartingPosition = (initialPosition: string | undefined): boolean => {
   return initialPosition === 'start' || !initialPosition
 }
 
@@ -55,7 +55,7 @@ export const useChessGame = ({
   boardLocked,
   questionSubmitted
 }: UseChessGameProps) => {
-  const initialFen = isStartingPosition(question.initialPosition)
+  const initialFen = shouldUseStartingPosition(question.initialPosition)
     ? STARTING_FEN
     : question.initialPosition
 
@@ -64,7 +64,7 @@ export const useChessGame = ({
 
   // Reset game when question changes
   useEffect(() => {
-    const fen = isStartingPosition(question.initialPosition)
+    const fen = shouldUseStartingPosition(question.initialPosition)
       ? STARTING_FEN
       : question.initialPosition
     setGame(new Chess(fen))

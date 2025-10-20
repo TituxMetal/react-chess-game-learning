@@ -73,9 +73,8 @@ export const getNextChapter = (
   }
 
   // First chapter of next story
-  const nextStory = currentStory.nextStory
-    ? storyIndex.find(story => story.id === currentStory.nextStory)
-    : null
+  const nextStoryId = currentStory.nextStory
+  const nextStory = nextStoryId ? storyIndex.find(story => story.id === nextStoryId) : null
 
   if (!nextStory || nextStory.chapters.length === 0) {
     return null
