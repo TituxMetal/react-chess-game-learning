@@ -28,7 +28,7 @@ import { matter } from 'vfile-matter'
  * // markdown: "# Chapter Content\nThis is the chapter content."
  * ```
  *
- * @throws Will log errors to console if markdown parsing fails, but does not throw exceptions
+ * @note Will log errors to console if markdown parsing fails, but does not throw exceptions
  */
 export const parseMarkdown = (content: string) => {
   const file = unified()

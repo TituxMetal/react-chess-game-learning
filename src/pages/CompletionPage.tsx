@@ -48,6 +48,9 @@ export const CompletionPage = () => {
     progress.completedChapters.has(`${storyId}-${chapter.id}`)
   ).length
 
+  // Calculate progress percentage
+  const progressPercentage = (completedChapters / completedStory.chapters.length) * 100
+
   // Get question statistics
   const stats = getStoryStats(storyId || '')
   const scorePercentage =
@@ -97,7 +100,7 @@ export const CompletionPage = () => {
               </div>
               <div className='text-center'>
                 <div className='text-3xl font-bold text-purple-400 mb-2'>
-                  {Math.round((completedChapters / completedStory.chapters.length) * 100)}%
+                  {Math.round(progressPercentage)}%
                 </div>
                 <div className='text-zinc-300'>Progression</div>
               </div>
@@ -108,18 +111,14 @@ export const CompletionPage = () => {
                 className='progress-bar-success'
                 style={
                   {
-                    '--progress-width': `${
-                      (completedChapters / completedStory.chapters.length) * 100
-                    }%`
+                    '--progress-width': `${progressPercentage}%`
                   } as React.CSSProperties
                 }
                 role='progressbar'
-                aria-valuenow={(completedChapters / completedStory.chapters.length) * 100}
+                aria-valuenow={progressPercentage}
                 aria-valuemin={0}
                 aria-valuemax={100}
-                aria-label={`${Math.round(
-                  (completedChapters / completedStory.chapters.length) * 100
-                )}% de progression`}
+                aria-label={`${Math.round(progressPercentage)}% de progression`}
               />
             </div>
 
