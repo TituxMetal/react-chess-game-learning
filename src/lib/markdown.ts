@@ -1,11 +1,11 @@
-import { unified } from 'unified'
-import remarkParse from 'remark-parse'
 import remarkFrontmatter from 'remark-frontmatter'
 import remarkGfm from 'remark-gfm'
+import remarkParse from 'remark-parse'
 import remarkStringify from 'remark-stringify'
-import { matter } from 'vfile-matter'
+import { unified } from 'unified'
 import type { VFile } from 'vfile'
-import type { Story, StoryFrontmatter, ChapterData } from '~/types/story'
+import { matter } from 'vfile-matter'
+import type { ChapterData, Story, StoryFrontmatter } from '~/types/story'
 
 /**
  * Extracts chapter contents from markdown body by splitting on ## headers
@@ -19,8 +19,11 @@ const extractChapterContents = (bodyContent: string): string[] => {
     return [bodyContent.trim()]
   }
 
-  // If no sections, return empty array (though this shouldn't happen)
+  // If no sections, this indicates malformed content; log warning and return trimmed content
   if (sections.length === 0) {
+    console.warn(
+      'extractChapterContents: No sections found in bodyContent. Returning trimmed bodyContent as single section.'
+    )
     return [bodyContent.trim()]
   }
 
