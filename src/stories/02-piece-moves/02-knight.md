@@ -4,12 +4,13 @@ title: 'Le cavalier'
 chapterNumber: 2
 storyId: '02-piece-moves'
 question:
-  type: 'multiple-choice'
-  prompt: 'Quelle est la particularité du cavalier ?'
-  options:
-    ['Il saute par-dessus les pièces', 'Il se déplace en ligne droite', 'Il ne peut pas capturer']
-  correctAnswer: 'Il saute par-dessus les pièces'
-  explanation: 'Le cavalier se déplace en forme de L et peut sauter par-dessus les autres pièces.'
+  type: 'move-based'
+  prompt:
+    'Déplacez le cavalier blanc (côté roi) en forme de L pour attaquer une case devant les pions
+    noirs.'
+  correctAnswer: ['g1f3', 'g1e2', 'b1c3', 'b1d2']
+  explanation: 'Excellent ! Le cavalier se déplace en L et peut sauter par-dessus les pions.'
+  initialPosition: 'start'
 ---
 
 ## Le cavalier

@@ -75,6 +75,90 @@
         "title": "Principes d'ouverture"
       }
     ],
-    "previousStory": "02-piece-moves"
+    "previousStory": "02-piece-moves",
+    "nextStory": "04-essential-tactics"
+  },
+  {
+    "id": "04-essential-tactics",
+    "title": "Tactiques essentielles",
+    "chapters": [
+      {
+        "id": "01-fork-attack",
+        "title": "La fourchette"
+      },
+      {
+        "id": "02-pin-skewer",
+        "title": "Le clouage et l'enfilade"
+      },
+      {
+        "id": "03-discovered-attack",
+        "title": "L'attaque à la découverte"
+      },
+      {
+        "id": "04-double-attack",
+        "title": "La double attaque"
+      },
+      {
+        "id": "05-tactical-puzzles",
+        "title": "Puzzles tactiques"
+      }
+    ],
+    "previousStory": "03-basic-rules",
+    "nextStory": "05-basic-endgames"
+  },
+  {
+    "id": "05-basic-endgames",
+    "title": "Finales de base",
+    "chapters": [
+      {
+        "id": "01-king-queen-vs-king",
+        "title": "Roi et dame contre roi"
+      },
+      {
+        "id": "02-king-rook-vs-king",
+        "title": "Roi et tour contre roi"
+      },
+      {
+        "id": "03-king-pawn-endgame",
+        "title": "Finale roi et pion"
+      },
+      {
+        "id": "04-opposition",
+        "title": "L'opposition"
+      },
+      {
+        "id": "05-stalemate-traps",
+        "title": "Éviter le pat"
+      }
+    ],
+    "previousStory": "04-essential-tactics",
+    "nextStory": "06-opening-fundamentals"
+  },
+  {
+    "id": "06-opening-fundamentals",
+    "title": "Principes d'ouverture",
+    "chapters": [
+      {
+        "id": "01-center-control",
+        "title": "Contrôle du centre"
+      },
+      {
+        "id": "02-piece-development",
+        "title": "Développement des pièces"
+      },
+      {
+        "id": "03-king-safety",
+        "title": "Sécurité du roi"
+      },
+      {
+        "id": "04-common-mistakes",
+        "title": "Erreurs courantes"
+      },
+      {
+        "id": "05-simple-openings",
+        "title": "Ouvertures simples"
+      }
+    ],
+    "previousStory": "05-basic-endgames"
   }
 ]

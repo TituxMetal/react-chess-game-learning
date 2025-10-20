@@ -4,11 +4,11 @@ title: 'Le pion'
 chapterNumber: 1
 storyId: '02-piece-moves'
 question:
-  type: 'multiple-choice'
-  prompt: 'Comment le pion capture-t-il une pièce adverse ?'
-  options: ['En avant', 'En arrière', 'En diagonale']
-  correctAnswer: 'En diagonale'
-  explanation: 'Le pion avance tout droit mais capture en diagonale.'
+  type: 'move-based'
+  prompt: "Déplacez le pion blanc devant le roi (e2) de deux cases vers l'avant."
+  correctAnswer: 'e2e4'
+  explanation: 'Parfait ! Le pion peut avancer de deux cases lors de son premier mouvement.'
+  initialPosition: 'start'
 ---
 
 ## Le pion
