@@ -24,7 +24,7 @@ import { parseMarkdown } from '~/utils/markdownParser'
  * if (chapter) return <div>{chapter.title}</div>;
  * ```
  *
- * @throws Logs errors to console but returns error state instead of throwing exceptions
+ * @note Logs errors to console but returns error state instead of throwing exceptions
  */
 export const useStory = (storyId: string, chapterId: string) => {
   const [chapter, setChapter] = useState<ChapterData | null>(null)

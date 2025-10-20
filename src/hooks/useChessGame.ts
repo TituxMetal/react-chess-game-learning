@@ -5,6 +5,13 @@ import { Question } from '~/types/story'
 
 const STARTING_FEN = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'
 
+/**
+ * Helper function to determine if a question should use the starting position
+ */
+const isStartingPosition = (initialPosition: string | undefined): boolean => {
+  return initialPosition === 'start' || !initialPosition
+}
+
 interface UseChessGameProps {
   question: Question
   onMove: (move: string, correct: boolean) => void
@@ -48,20 +55,18 @@ export const useChessGame = ({
   boardLocked,
   questionSubmitted
 }: UseChessGameProps) => {
-  const initialFen =
-    question.initialPosition === 'start' || !question.initialPosition
-      ? STARTING_FEN
-      : question.initialPosition
+  const initialFen = isStartingPosition(question.initialPosition)
+    ? STARTING_FEN
+    : question.initialPosition
 
   const [game, setGame] = useState<Chess>(new Chess(initialFen))
   const [userMove, setUserMove] = useState<string | null>(null)
 
   // Reset game when question changes
   useEffect(() => {
-    const fen =
-      question.initialPosition === 'start' || !question.initialPosition
-        ? STARTING_FEN
-        : question.initialPosition
+    const fen = isStartingPosition(question.initialPosition)
+      ? STARTING_FEN
+      : question.initialPosition
     setGame(new Chess(fen))
     setUserMove(null)
     // Reset question state to ensure clean slate for new question

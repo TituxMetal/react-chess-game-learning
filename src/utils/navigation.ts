@@ -15,7 +15,7 @@ import { StoryIndex } from '~/types/story'
  * // Returns: [{ id: "01-introduction", title: "Introduction aux échecs", chapters: [...] }]
  * ```
  *
- * @throws Logs errors to console but returns empty array instead of throwing exceptions
+ * @note Logs errors to console but returns empty array instead of throwing exceptions
  */
 export const loadStoryIndex = async (): Promise<StoryIndex[]> => {
   try {
@@ -73,11 +73,9 @@ export const getNextChapter = (
   }
 
   // First chapter of next story
-  if (!currentStory.nextStory) {
-    return null
-  }
-
-  const nextStory = storyIndex.find(story => story.id === currentStory.nextStory)
+  const nextStory = currentStory.nextStory
+    ? storyIndex.find(story => story.id === currentStory.nextStory)
+    : null
 
   if (!nextStory || nextStory.chapters.length === 0) {
     return null

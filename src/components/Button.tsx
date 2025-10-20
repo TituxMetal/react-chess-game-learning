@@ -30,7 +30,7 @@ export const Button = ({
 
   return (
     <button
-      onClick={disabled ? undefined : onClick}
+      onClick={onClick}
       disabled={disabled}
       className={`${baseClasses} ${variantClasses[variant]} ${className}`}
       aria-label={ariaLabel}
