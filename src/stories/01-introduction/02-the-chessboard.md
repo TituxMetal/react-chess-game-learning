@@ -3,6 +3,7 @@ id: '02-the-chessboard'
 title: "L'échiquier"
 chapterNumber: 2
 storyId: '01-introduction'
+chessPosition: 'startpos'
 question:
   type: 'multiple-choice'
   prompt: 'Combien de cases possède un échiquier ?'

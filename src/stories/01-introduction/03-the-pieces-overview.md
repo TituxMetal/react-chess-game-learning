@@ -3,6 +3,7 @@ id: '03-the-pieces-overview'
 title: 'Présentation des pièces'
 chapterNumber: 3
 storyId: '01-introduction'
+chessPosition: 'startpos'
 question:
   type: 'multiple-choice'
   prompt: 'Combien de pièces chaque joueur possède-t-il au début de la partie ?'

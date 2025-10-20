@@ -4,12 +4,12 @@ title: 'La tour'
 chapterNumber: 4
 storyId: '02-piece-moves'
 question:
-  type: 'multiple-choice'
-  prompt: 'Comment la tour se déplace-t-elle ?'
-  options: ['En diagonale', 'En ligne droite', 'En L']
-  correctAnswer: 'En ligne droite'
+  type: 'move-based'
+  prompt: 'Déplacez la tour blanche pour attaquer directement le cavalier noir sur f6.'
+  correctAnswer: 'f1f6'
   explanation:
-    "La tour se déplace horizontalement ou verticalement, sur autant de cases qu'elle le souhaite."
+    'Parfait ! La tour se déplace en ligne droite et peut attaquer sur toute sa trajectoire.'
+  initialPosition: '4k3/8/5n2/8/8/8/8/5R1K w - - 0 1'
 ---
 
 ## La tour

@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { useProgress } from '../hooks/useProgress'
-import { StoryIndex } from '../types/story'
-import { loadStoryIndex } from '../utils/navigation'
+import { Button } from '~/components/Button'
+import { useProgress } from '~/hooks/useProgress'
+import { getStoryStats } from '~/lib/stores/questionStore'
+import { StoryIndex } from '~/types/story'
+import { loadStoryIndex } from '~/utils/navigation'
 
 export const CompletionPage = () => {
   const { storyId } = useParams<{ storyId: string }>()
@@ -46,63 +48,134 @@ export const CompletionPage = () => {
     progress.completedChapters.has(`${storyId}-${chapter.id}`)
   ).length
 
+  // Get question statistics
+  const stats = getStoryStats(storyId || '')
+  const scorePercentage =
+    stats.totalQuestions > 0 ? Math.round((stats.correctAnswers / stats.totalQuestions) * 100) : 0
+  const isHighScore = scorePercentage >= 80
+
   return (
-    <div className='min-h-screen bg-gradient-to-br from-dark-950 via-dark-900 to-dark-800'>
-      <div className='container mx-auto px-4 py-16'>
-        <div className='text-center max-w-2xl mx-auto'>
-          <div className='mb-8'>
-            <div className='text-6xl mb-6'>🎉</div>
-            <h1 className='text-4xl font-bold mb-4 bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent'>
-              Félicitations !
-            </h1>
-            <h2 className='text-2xl font-semibold mb-6 text-dark-100'>
-              Tu as terminé "{completedStory.title}"
-            </h2>
+    <div className='completion-background'>
+      <div className='completion-container'>
+        <div className='completion-content'>
+          <div className='completion-hero'>
+            <div className='text-6xl mb-6' aria-hidden='true'>
+              🎉
+            </div>
+            <h1 className='completion-title'>Bravo !</h1>
+            <h2 className='completion-subtitle'>Tu as terminé "{completedStory.title}"</h2>
+            <p className='text-zinc-300 text-lg mb-4'>
+              Excellent travail ! Tu as maîtrisé les concepts de cette histoire.
+            </p>
+            <p className='text-zinc-400'>
+              Continue ton apprentissage pour devenir un véritable maître des échecs !
+            </p>
           </div>
 
-          <div className='bg-dark-800 rounded-xl p-8 border border-dark-700 mb-8'>
+          {/* Key Concepts Section */}
+          {completedStory.keyConcepts && completedStory.keyConcepts.length > 0 && (
+            <div className='card-primary text-left animate-slide-in-1'>
+              <h3 className='text-xl font-semibold mb-4 text-zinc-100'>
+                Ce que vous avez appris :
+              </h3>
+              <ul className='prose prose-invert prose-zinc max-w-none list-disc list-inside space-y-2'>
+                {completedStory.keyConcepts.map(concept => (
+                  <li key={concept} className='text-zinc-300'>
+                    {concept}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {/* Statistics Section */}
+          <div className='card-stats animate-slide-in-2'>
             <div className='grid grid-cols-2 gap-6 mb-6'>
               <div className='text-center'>
                 <div className='text-3xl font-bold text-blue-400 mb-2'>{completedChapters}</div>
-                <div className='text-dark-300'>Chapitres complétés</div>
+                <div className='text-zinc-300'>Chapitres complétés</div>
               </div>
               <div className='text-center'>
                 <div className='text-3xl font-bold text-purple-400 mb-2'>
                   {Math.round((completedChapters / completedStory.chapters.length) * 100)}%
                 </div>
-                <div className='text-dark-300'>Progression</div>
+                <div className='text-zinc-300'>Progression</div>
               </div>
             </div>
 
-            <div className='w-full bg-dark-700 rounded-full h-3 mb-6'>
+            <div className='w-full bg-zinc-700 rounded-full h-3 mb-6'>
               <div
-                className='bg-gradient-to-r from-green-500 to-blue-500 h-3 rounded-full transition-all duration-500'
-                style={{ width: `${(completedChapters / completedStory.chapters.length) * 100}%` }}
+                className='progress-bar-success'
+                style={
+                  {
+                    '--progress-width': `${
+                      (completedChapters / completedStory.chapters.length) * 100
+                    }%`
+                  } as React.CSSProperties
+                }
+                role='progressbar'
+                aria-valuenow={(completedChapters / completedStory.chapters.length) * 100}
+                aria-valuemin={0}
+                aria-valuemax={100}
+                aria-label={`${Math.round(
+                  (completedChapters / completedStory.chapters.length) * 100
+                )}% de progression`}
               />
             </div>
 
-            <p className='text-dark-200 leading-relaxed'>
-              Excellent travail ! Tu as maîtrisé les concepts de cette histoire. Continue ton
-              apprentissage pour devenir un véritable maître des échecs !
-            </p>
+            {/* Question Stats */}
+            {stats.totalQuestions > 0 && (
+              <div className='border-t border-zinc-700 pt-6 mt-6'>
+                <div className='text-center mb-4'>
+                  <div
+                    className={`text-4xl font-bold mb-2 ${
+                      isHighScore ? 'text-green-400' : 'text-yellow-400'
+                    }`}
+                    aria-live='polite'
+                  >
+                    {stats.correctAnswers}/{stats.totalQuestions}
+                  </div>
+                  <div className='text-zinc-300'>réponses correctes</div>
+                </div>
+                <div className='w-full bg-zinc-700 rounded-full h-3'>
+                  <div
+                    className={`h-3 rounded-full transition-all duration-500 ${
+                      isHighScore ? 'progress-bar-score-high' : 'progress-bar-score-medium'
+                    }`}
+                    style={{ '--progress-width': `${scorePercentage}%` } as React.CSSProperties}
+                    role='progressbar'
+                    aria-valuenow={scorePercentage}
+                    aria-valuemin={0}
+                    aria-valuemax={100}
+                    aria-label={`${scorePercentage}% de réponses correctes`}
+                  />
+                </div>
+                <div className='text-center mt-4 text-zinc-300'>Score : {scorePercentage}%</div>
+              </div>
+            )}
           </div>
 
-          <div className='flex flex-col sm:flex-row gap-4 justify-center'>
+          {/* Navigation Buttons */}
+          <div className='flex flex-col sm:flex-row gap-4 justify-center animate-slide-in-3'>
             {completedStory.nextStory && (
-              <button
+              <Button
                 onClick={handleContinue}
-                className='px-8 py-4 text-lg font-semibold bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-xl transition-all duration-300 transform hover:scale-105'
+                variant='primary'
+                className='px-8 py-4 text-lg font-semibold'
+                aria-label="Continuer vers l'histoire suivante"
               >
-                Histoire suivante →
-              </button>
+                Continuer →
+              </Button>
             )}
 
-            <button
+            <Button
               onClick={handleHome}
-              className='px-8 py-4 text-lg font-semibold bg-dark-700 hover:bg-dark-600 text-dark-100 rounded-xl transition-all duration-300 border border-dark-600'
+              variant='secondary'
+              className='px-8 py-4 text-lg font-semibold'
+              aria-label="Retour à l'accueil"
             >
               Retour à l'accueil
-            </button>
+            </Button>
           </div>
         </div>
       </div>

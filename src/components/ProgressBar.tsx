@@ -17,8 +17,8 @@ export const ProgressBar = ({ current, total, className = '' }: ProgressBarProps
       </div>
       <div className='w-full bg-zinc-800 rounded-full h-2'>
         <div
-          className='bg-amber-600 h-2 rounded-full transition-all duration-300'
-          style={{ width: `${percentage}%` }}
+          className='bg-amber-600 progress-bar-dynamic'
+          style={{ '--progress-width': `${percentage}%` } as React.CSSProperties}
         />
       </div>
     </div>

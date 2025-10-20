@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { Question } from '../types/story'
+import { MoveBasedQuestion } from '~/features/questions/MoveBasedQuestion'
+import { Question } from '~/types/story'
 import { Button } from './Button'
 
 interface QuestionComponentProps {
@@ -18,15 +19,26 @@ export const QuestionComponent = ({ question, onAnswer }: QuestionComponentProps
 
     const isCorrect = answer === question.correctAnswer
 
-    if (isCorrect) {
-      setIsAnswered(true)
-      setTimeout(() => onAnswer(isCorrect), 200)
+    if (!isCorrect) {
+      return
     }
+
+    setIsAnswered(true)
+    onAnswer(isCorrect)
   }
 
   const handleRetry = () => {
     setSelectedAnswer(null)
     setShowFeedback(false)
+  }
+
+  const handleMoveAnswer = (_move: string, correct: boolean) => {
+    setIsAnswered(true)
+    onAnswer(correct)
+  }
+
+  if (question.type === 'move-based') {
+    return <MoveBasedQuestion question={question} onMove={handleMoveAnswer} />
   }
 
   if (question.type === 'multiple-choice' && question.options) {
@@ -35,37 +47,48 @@ export const QuestionComponent = ({ question, onAnswer }: QuestionComponentProps
         <h3 className='text-xl font-medium mb-6 text-zinc-100'>{question.prompt}</h3>
 
         <div className='space-y-3'>
-          {question.options.map((option, index) => {
+          {question.options.map(option => {
             const isSelected = selectedAnswer === option
             const isCorrect = option === question.correctAnswer
             const isWrong = isSelected && !isCorrect
 
-            let buttonClass =
-              'w-full p-4 text-left rounded-lg border transition-colors duration-150 cursor-pointer text-base '
+            const baseClasses =
+              'w-full p-4 text-left rounded-lg border transition-colors duration-150 cursor-pointer text-base'
 
-            if (showFeedback) {
-              if (isCorrect) {
-                buttonClass += 'bg-emerald-900 border-emerald-700 text-zinc-100'
-              } else if (isWrong) {
-                buttonClass += 'bg-zinc-800 border-zinc-700 text-zinc-400'
-              } else {
-                buttonClass += 'bg-zinc-800 border-zinc-700 text-zinc-300'
+            const getVariantClasses = () => {
+              if (!showFeedback) {
+                return isSelected
+                  ? 'bg-amber-900 border-amber-700 text-zinc-100'
+                  : 'bg-zinc-800 border-zinc-700 text-zinc-200 hover:bg-zinc-700 hover:border-zinc-600'
               }
-            } else {
-              buttonClass += isSelected
-                ? 'bg-amber-900 border-amber-700 text-zinc-100'
-                : 'bg-zinc-800 border-zinc-700 text-zinc-200 hover:bg-zinc-700 hover:border-zinc-600'
+
+              if (isCorrect) {
+                return 'bg-emerald-900 border-emerald-700 text-zinc-100'
+              }
+
+              if (isWrong) {
+                return 'bg-zinc-800 border-zinc-700 text-zinc-400'
+              }
+
+              return 'bg-zinc-800 border-zinc-700 text-zinc-300'
             }
 
+            const buttonClass = `${baseClasses} ${getVariantClasses()}`
+
             return (
-              <button
-                key={index}
-                onClick={() => !isAnswered && handleAnswerSelect(option)}
+              <Button
+                key={option}
+                onClick={() => {
+                  if (isAnswered) {
+                    return
+                  }
+                  handleAnswerSelect(option)
+                }}
                 disabled={isAnswered}
                 className={buttonClass}
               >
                 {option}
-              </button>
+              </Button>
             )
           })}
         </div>
@@ -73,9 +96,11 @@ export const QuestionComponent = ({ question, onAnswer }: QuestionComponentProps
         {showFeedback && (
           <div className='mt-6 p-5 rounded-lg bg-zinc-800 border border-zinc-700'>
             <div className='flex items-center justify-between mb-3'>
-              <span className={`text-base font-medium ${
-                selectedAnswer === question.correctAnswer ? 'text-emerald-300' : 'text-zinc-300'
-              }`}>
+              <span
+                className={`text-base font-medium ${
+                  selectedAnswer === question.correctAnswer ? 'text-emerald-300' : 'text-zinc-300'
+                }`}
+              >
                 {selectedAnswer === question.correctAnswer ? '✓ Correct' : '✗ Incorrect'}
               </span>
               {!isAnswered && (

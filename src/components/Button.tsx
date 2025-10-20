@@ -1,9 +1,12 @@
+import React from 'react'
+
 interface ButtonProps {
-  children: React.ReactNode
-  onClick?: () => void
-  disabled?: boolean
-  variant?: 'primary' | 'secondary' | 'neutral'
-  className?: string
+  'children': React.ReactNode
+  'onClick'?: () => void
+  'disabled'?: boolean
+  'variant'?: 'primary' | 'secondary' | 'neutral'
+  'className'?: string
+  'aria-label'?: string
 }
 
 export const Button = ({
@@ -11,9 +14,11 @@ export const Button = ({
   onClick,
   disabled = false,
   variant = 'neutral',
-  className = ''
+  className = '',
+  'aria-label': ariaLabel
 }: ButtonProps) => {
-  const baseClasses = 'px-6 py-3 rounded-lg font-medium transition-colors duration-200 cursor-pointer'
+  const baseClasses =
+    'px-6 py-3 rounded-lg font-medium transition-colors duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 focus:ring-offset-zinc-900'
 
   const variantClasses = {
     primary: disabled
@@ -25,9 +30,10 @@ export const Button = ({
 
   return (
     <button
-      onClick={onClick}
+      onClick={disabled ? undefined : onClick}
       disabled={disabled}
       className={`${baseClasses} ${variantClasses[variant]} ${className}`}
+      aria-label={ariaLabel}
     >
       {children}
     </button>

@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { Button } from '../components/Button'
+import { Button } from '~/components/Button'
 
 export const HomePage = () => {
   const navigate = useNavigate()
@@ -9,13 +9,15 @@ export const HomePage = () => {
   }
 
   return (
-    <div className='min-h-screen bg-zinc-900 flex flex-col justify-center items-center px-6 py-8'>
+    <main className='min-h-screen bg-zinc-900 flex flex-col justify-center items-center px-6 py-8'>
       {/* Chess Icon */}
-      <div className='text-6xl mb-8'>♟️</div>
+      <div className='text-6xl mb-8' aria-hidden='true'>
+        ♟️
+      </div>
 
-      {/* Title */}
+      {/* Welcome Message */}
       <h1 className='text-4xl font-semibold text-zinc-100 mb-4 text-center'>
-        Apprends les Échecs
+        Bienvenue dans votre apprentissage des échecs
       </h1>
 
       {/* Description */}
@@ -23,9 +25,14 @@ export const HomePage = () => {
         Découvre le monde des échecs à travers des histoires captivantes.
       </p>
 
-      {/* Big Button */}
-      <Button onClick={startLearning} variant='primary' className='px-10 py-3.5 mb-20'>
-        Commencer
+      {/* Start Learning Button */}
+      <Button
+        onClick={startLearning}
+        variant='primary'
+        className='px-10 py-3.5 mb-20'
+        aria-label="Commencer l'apprentissage des échecs"
+      >
+        Commencer l'apprentissage
       </Button>
 
       {/* Feature Cards */}
@@ -48,6 +55,6 @@ export const HomePage = () => {
           <p className='text-zinc-400 text-sm'>Teste tes connaissances</p>
         </div>
       </div>
-    </div>
+    </main>
   )
 }
